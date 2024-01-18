@@ -30,6 +30,4 @@ In a separate terminal execute:
 
 ### 7. Start frontend
 `$ npm run start`
-=======
-# Blockchain-p
->>>>>>> c00c48fe948256a9fa266a7377631ffd95e3d2f8
+
