@@ -15,12 +15,56 @@ import config from './config.json';
 
 function App() {
 
+  const [provider, setProvider] = useState(null)
+
+  const [account, setAccount] = useState(null)
+
+  const loadBlockchainData = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+    setProvider(provider)
+
+    const network = await provider.getNetwork()
+
+
+    window.etherum.on('accountsChanged', async () => {
+      const accounts = await window.etherum.request({method: 'eth_requestAccounts'});
+      const account = ethers.utils.getAddress(accounts[0])
+      setAccount(account);
+    })
+  }
+
+  useEffect(()=> {
+    loadBlockchainData()
+  }, [])
+
   return (
     <div>
 
+      <Navigation account={account} setAccount={setAccount} />
+      <Search />
       <div className='cards__section'>
 
-        <h3>Welcome to Millow</h3>
+        <h3>Homes for you</h3>
+
+        <hr />
+
+        <div className = 'cards'>
+          <div className = 'card'>
+            <div className ='card__image'>
+              <img src = "" alt="Home"/>
+            </div>
+            <div className='card__info'>
+              <h4>1 Eth</h4>
+              <p>
+                <strong>1</strong>bds
+                <strong>2</strong>ba
+                <strong>3</strong>sqft
+              </p>
+              <p>420 Kielecka</p>
+            </div>
+          </div>
+        </div>
 
       </div>
 
